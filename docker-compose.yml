@@ -16,17 +16,19 @@ services:
     networks:
       sample:
         ipv4_address: 172.16.1.2
-  proxy:
-    build: proxy
+  web:
+    build: web
     ports:
-      - "10280:80"
+      - "10380:80"
+    tty: true
+    stdin_open: true
     networks:
       sample:
         ipv4_address: 172.16.1.3
-  web:
-    build: proxy
+  forward_proxy:
+    build: forward_proxy
     ports:
-      - "10380:80"
+      - "10480:80"
     networks:
       sample:
         ipv4_address: 172.16.1.4
