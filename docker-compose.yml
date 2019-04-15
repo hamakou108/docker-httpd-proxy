@@ -8,16 +8,38 @@ networks:
       config:
         - subnet: 172.16.1.0/24
 
+volumes:
+  ca_volume:
+    driver: local
+  client_volume:
+    driver: local
+  server_volume:
+    driver: local
+
 services:
-  client:
-    image: centos:7
+  ca:
+    build: ca
     tty: true
     stdin_open: true
     networks:
       sample:
+        ipv4_address: 172.16.1.254
+    volumes:
+      - ca_volume:/etc/pki/CA
+  client:
+    build: client
+    tty: true
+    stdin_open: true
+    links:
+      - server:my-server
+      - forward_proxy:my-forward-proxy
+    networks:
+      sample:
         ipv4_address: 172.16.1.2
-  web:
-    build: web
+    volumes:
+      - client_volume:/opt
+  server:
+    build: server
     ports:
       - "10380:80"
     tty: true
@@ -25,10 +47,14 @@ services:
     networks:
       sample:
         ipv4_address: 172.16.1.3
+    volumes:
+      - server_volume:/usr/local/apache2/conf
   forward_proxy:
     build: forward_proxy
     ports:
       - "10480:80"
+    links:
+      - server:my-server
     networks:
       sample:
         ipv4_address: 172.16.1.4
