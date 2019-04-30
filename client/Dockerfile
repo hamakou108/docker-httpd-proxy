@@ -8,8 +8,8 @@ RUN yum -y update \
 COPY openssl.cnf /etc/pki/tls/
 
 WORKDIR /opt
-COPY client.key ./conf/
-COPY client.crt ./conf/
+COPY client.key ./
+COPY client.crt ./
 
 CMD ["/bin/bash"]
 
