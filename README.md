@@ -32,12 +32,13 @@ $ docker-compose restart
 
 ```
 $ docker exec -it docker-httpd-proxy_client_1 curl http://my-server
-$ docker exec -it docker-httpd-proxy_client_1 curl http://my-server -x my-forward-proxy:80
+$ docker exec -it docker-httpd-proxy_client_1 curl http://my-server -x my-forward-proxy:8080
 ```
 
 #### HTTPS with server/client certificates
 
 ```
 $ docker exec -it docker-httpd-proxy_client_1 curl -k https://my-server --cert ./client.crt --key ./client.key
+$ docker exec -it docker-httpd-proxy_client_1 curl -k https://my-server --cert ./client.crt --key ./client.key -x my-forward-proxy:8080
 ```
 
