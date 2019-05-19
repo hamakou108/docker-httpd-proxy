@@ -38,7 +38,7 @@ $ docker exec -it docker-httpd-proxy_client_1 curl http://my-server -x my-forwar
 #### HTTPS with server/client certificates
 
 ```
-$ docker exec -it docker-httpd-proxy_client_1 curl -k https://my-server --cert ./client.crt --key ./client.key
-$ docker exec -it docker-httpd-proxy_client_1 curl -k https://my-server --cert ./client.crt --key ./client.key -x my-forward-proxy:8080
+$ docker exec -it docker-httpd-proxy_client_1 curl https://my-server --cert ./client.crt --key ./client.key --cacert ./cacert.pem
+$ docker exec -it docker-httpd-proxy_client_1 curl https://my-server --cert ./client.crt --key ./client.key --cacert ./cacert.pem -x my-forward-proxy:8080
 ```
 

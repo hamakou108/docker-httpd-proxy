@@ -10,6 +10,7 @@ COPY openssl.cnf /etc/pki/tls/
 WORKDIR /opt
 COPY client.key ./
 COPY client.crt ./
+COPY cacert.pem ./
 
 CMD ["/bin/bash"]
 
