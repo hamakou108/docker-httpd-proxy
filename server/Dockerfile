@@ -9,9 +9,9 @@ COPY openssl.cnf /etc/ssl/
 
 COPY httpd.conf ./conf/
 COPY httpd-ssl.conf ./conf/extra/
-COPY server.key ./conf/
-COPY server.crt ./conf/
-COPY cacert.pem ./conf/
+COPY server-key-dec.pem ./conf/ssl/
+COPY server-cert-dec.pem ./conf/ssl/
+COPY cacert.pem ./conf/ssl/
 
 CMD ["httpd-foreground"]
 

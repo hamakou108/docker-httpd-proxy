@@ -8,9 +8,9 @@ RUN yum -y update \
 COPY openssl.cnf /etc/pki/tls/
 
 WORKDIR /opt
-COPY client.key ./
-COPY client.crt ./
-COPY cacert.pem ./
+COPY client-key-dec.pem ./ssl/
+COPY client-cert-dec.pem ./ssl/
+COPY cacert.pem ./ssl/
 
 CMD ["/bin/bash"]
 

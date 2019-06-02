@@ -9,11 +9,11 @@ networks:
         - subnet: 172.16.1.0/24
 
 volumes:
-  ca_volume:
+  ca_CA:
     driver: local
-  client_volume:
+  client_opt:
     driver: local
-  server_volume:
+  server_ssl:
     driver: local
 
 services:
@@ -25,7 +25,7 @@ services:
       sample:
         ipv4_address: 172.16.1.254
     volumes:
-      - ca_volume:/etc/pki/CA
+      - ca_CA:/etc/pki/CA
   client:
     build: client
     tty: true
@@ -37,7 +37,7 @@ services:
       sample:
         ipv4_address: 172.16.1.2
     volumes:
-      - client_volume:/opt
+      - client_opt:/opt/ssl
   server:
     build: server
     ports:
@@ -48,7 +48,7 @@ services:
       sample:
         ipv4_address: 172.16.1.3
     volumes:
-      - server_volume:/usr/local/apache2/conf
+      - server_ssl:/usr/local/apache2/conf/ssl/
   forward_proxy:
     build: forward_proxy
     ports:
